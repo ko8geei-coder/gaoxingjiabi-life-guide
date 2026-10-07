@@ -1,0 +1,14 @@
+# 依赖
+node_modules/
+*/node_modules/
+
+# 备份与临时/参考文件
+*.bak
+raw.bak/
+_obsidian_src/
+_pdf_text.txt
+life-guide-handoff.zip
+
+# 验证用截图（非源码）
+shot_*.png
+diag_*.png

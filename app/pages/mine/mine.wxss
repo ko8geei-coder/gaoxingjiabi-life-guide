@@ -1,0 +1,48 @@
+/* pages/mine/mine.wxss */
+.page { padding: 0 24rpx 40rpx; }
+
+/* 标题 */
+.head { padding: 28rpx 4rpx 24rpx; }
+.eyebrow { font-size:24rpx; color:#0e7c5a; margin-bottom:10rpx; }
+.title { font-size:44rpx; font-weight:700; color:#12211c; line-height:1.3; }
+.sub { font-size:24rpx; color:#8a9a94; margin-top:12rpx; }
+
+/* 三段统计 */
+.stats { display:flex; flex-direction:row; align-items:center; padding:32rpx 0; margin-bottom:20rpx; }
+.st { flex:1; display:flex; flex-direction:column; align-items:center; }
+.st-num { font-size:44rpx; font-weight:700; color:#0e7c5a; }
+.st-lab { font-size:22rpx; color:#8a9a94; margin-top:6rpx; }
+.st-div { width:1rpx; height:56rpx; background:#eef1ef; }
+
+/* 随机一条 */
+.random { display:flex; flex-direction:row; align-items:center; background:#0e7c5a; border-radius:999rpx; padding:24rpx 32rpx; margin-bottom:32rpx; }
+.rd-ico { font-size:32rpx; margin-right:14rpx; }
+.rd-txt { flex:1; color:#fff; font-size:28rpx; font-weight:600; }
+.rd-arrow { color:#fff; font-size:28rpx; }
+
+/* 区块 */
+.sec-head { justify-content:space-between; align-items:center; margin:0 4rpx 16rpx; }
+.sec-title { font-size:30rpx; font-weight:700; color:#12211c; }
+.sec-more { font-size:24rpx; color:#0e7c5a; }
+
+/* 最近读过 */
+.his-list { padding:8rpx 24rpx; }
+.h-row { display:flex; flex-direction:row; align-items:center; padding:20rpx 0; border-bottom:1rpx solid #eef1ef; }
+.h-row:last-child { border-bottom:none; }
+.score-badge { width:60rpx; height:60rpx; border-radius:16rpx; display:flex; align-items:center; justify-content:center; margin-right:20rpx; flex:none; }
+.score-badge-num { font-size:25rpx; font-weight:700; color:#fff; }
+.h-main { min-width:0; }
+.h-title { font-size:28rpx; font-weight:600; color:#1a1a1a; line-height:1.4; }
+.h-prog { align-items:center; margin-top:10rpx; }
+.h-bar { height:8rpx; background:#e8ebe9; border-radius:999rpx; overflow:hidden; }
+.h-in { height:100%; background:#0e7c5a; border-radius:999rpx; }
+.h-pct { font-size:20rpx; color:#a8b4af; margin-left:14rpx; }
+
+/* 关于 */
+.about-card { padding:8rpx 26rpx; margin-top:24rpx; }
+.ab-row { display:flex; flex-direction:row; justify-content:space-between; padding:20rpx 0; border-bottom:1rpx solid #eef1ef; }
+.ab-row:last-child { border-bottom:none; }
+.ab-k { font-size:26rpx; color:#8a9a94; }
+.ab-v { font-size:26rpx; color:#1a1a1a; font-weight:600; }
+
+.foot-note { text-align:center; color:#bcc6c2; font-size:22rpx; margin-top:36rpx; line-height:1.6; }

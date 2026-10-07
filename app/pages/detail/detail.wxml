@@ -1,0 +1,82 @@
+<!-- pages/detail/detail.wxml -->
+<view class="page" wx:if="{{title}}">
+  <!-- 标题区 -->
+  <view class="head card">
+    <text class="ch-badge">第 {{c + 1}} 章 · {{chapterTitle}}</text>
+    <view class="title">{{title}}</view>
+  </view>
+
+  <!-- 性价比可视化（原创） -->
+  <view class="score card" wx:if="{{sc}}">
+    <view class="score-ring" style="border-color:{{sc.index >= 70 ? '#0e7c5a' : (sc.index >= 50 ? '#2d9a6b' : (sc.index >= 30 ? '#c08a2e' : '#b0623c'))}}">
+      <text class="score-num">{{sc.index}}</text>
+      <text class="score-lab">性价比</text>
+    </view>
+    <view class="score-side flex-1">
+      <view class="score-tier-row flex-row">
+        <text class="tier-{{tierKey}} score-tier">{{tierLabel}}</text>
+        <text class="lv lv-{{level}} score-lv">证据 {{level || '—'}}</text>
+      </view>
+      <view class="score-note">回报 {{sc.yld}} ÷ 成本 {{sc.cost}} = 指数 {{sc.index}}（证据加权可信分 {{sc.trust}}）</view>
+      <!-- 成本构成条 -->
+      <view class="segs flex-row">
+        <view class="seg" wx:for="{{segs}}" wx:key="label" style="width:{{item.percent}}%;background:{{item.color}}">
+          <text class="seg-t">{{item.label}}</text>
+        </view>
+        <view class="seg seg-free" wx:if="{{segs.length === 0}}"><text class="seg-t">零成本</text></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 一句话结论 -->
+  <view class="block card">
+    <view class="block-title">💡 一句话结论</view>
+    <view class="para">{{plain}}</view>
+  </view>
+
+  <!-- 成本 -->
+  <view class="block card" wx:if="{{cost}}">
+    <view class="block-title">💸 成本：要付出什么</view>
+    <view class="para">{{cost}}</view>
+  </view>
+
+  <!-- 原文 -->
+  <view class="block card" wx:if="{{benefit}}">
+    <view class="block-title">📄 原文：完整论述</view>
+    <view class="para">{{benefit}}</view>
+  </view>
+
+  <!-- 详细解读 -->
+  <view class="block card" wx:if="{{interp.length}}">
+    <view class="block-title">🔍 详细解读</view>
+    <view class="interp-row" wx:for="{{interp}}" wx:key="k">
+      <text class="interp-k">{{item.k}}</text>
+      <text class="interp-v">{{item.v}}</text>
+    </view>
+  </view>
+
+  <!-- 注意事项 -->
+  <view class="block card" wx:if="{{note}}">
+    <view class="block-title">📝 注意事项</view>
+    <view class="para note">{{note}}</view>
+  </view>
+
+  <!-- 来源 -->
+  <view class="block card" wx:if="{{source}}">
+    <view class="block-title flex-row">
+      <text class="flex-1">🔗 证据来源</text>
+      <text class="copy" bindtap="onCopySource">复制</text>
+    </view>
+    <view class="src">{{source}}</view>
+  </view>
+
+  <view class="spacer"></view>
+</view>
+
+<!-- 底部 -->
+<view class="bar" wx:if="{{title}}">
+  <view class="bar-fav" bindtap="onFav">
+    <text class="bar-fav-ico">{{faved ? '★' : '☆'}}</text>
+    <text class="bar-fav-txt">{{faved ? '已收藏' : '收藏'}}</text>
+  </view>
+</view>

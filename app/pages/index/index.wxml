@@ -1,0 +1,138 @@
+<!-- pages/index/index.wxml -->
+<view class="page">
+  <!-- 品牌头 -->
+  <view class="hero">
+    <view class="hero-brand">高性价比人生指南</view>
+    <view class="hero-sub">每条建议都算过性价比 · 零成本高回报的先做</view>
+    <view class="hero-stats flex-row">
+      <view class="hs"><text class="hs-num">{{total}}</text><text class="hs-lab">条建议</text></view>
+      <view class="hs-div"></view>
+      <view class="hs"><text class="hs-num">{{categories.length}}</text><text class="hs-lab">大主题</text></view>
+      <view class="hs-div"></view>
+      <view class="hs"><text class="hs-num">{{scenarios.length}}</text><text class="hs-lab">个场景</text></view>
+    </view>
+  </view>
+
+  <!-- 搜索：点击进入查找页（对齐原版交互） -->
+  <view class="search flex-row" bindtap="goSearch">
+    <text class="ico">🔍</text>
+    <text class="flex-1 search-ph">在生活手册里找个办法</text>
+    <text class="search-arrow">↗</text>
+  </view>
+
+  <!-- 试试搜 -->
+  <view class="try flex-row">
+    <text class="try-label">试试搜</text>
+    <text class="try-word" wx:for="{{cats}}" wx:key="*this" catchtap="onSearchByWord" data-q="{{item}}">{{item}}</text>
+  </view>
+
+  <!-- 接上次读 -->
+  <view class="resume card" wx:if="{{lastRead}}" bindtap="goLast">
+    <view class="resume-l flex-row">
+      <text class="resume-ico">🕘</text>
+      <text class="resume-label">接上次读</text>
+    </view>
+    <view class="resume-title">{{lastRead.title}}</view>
+    <view class="resume-ch">《{{lastRead.ch}}》 ›</view>
+  </view>
+
+  <!-- 今日一条 -->
+  <view class="today card" wx:if="{{today}}" bindtap="goToday">
+    <view class="today-top flex-row">
+      <text class="today-ico">🌱</text>
+      <text class="today-label">今日一条 · 从小事开始</text>
+      <text class="flex-1"></text>
+      <text class="today-change" catchtap="pickToday">换一条</text>
+    </view>
+    <view class="today-title">{{today.title}}</view>
+    <view class="today-tags flex-row">
+      <text class="tier-{{today.tierKey}} today-tier">性价比 {{today.index}}</text>
+      <text class="lv lv-{{today.level}} today-lv">证据 {{today.level || '—'}}</text>
+    </view>
+    <view class="today-plain">{{today.plain}}</view>
+    <view class="today-foot flex-row">
+      <text class="today-ch">《{{today.chapterTitle}}》</text>
+      <text class="today-go">看看怎么做 ↗</text>
+    </view>
+  </view>
+
+  <!-- 模式切换 -->
+  <view class="mode-switch">
+    <view class="mode-btn {{mode === 'need' ? 'on' : ''}}" data-mode="need" bindtap="switchMode">按需查找</view>
+    <view class="mode-btn {{mode === 'chapter' ? 'on' : ''}}" data-mode="chapter" bindtap="switchMode">章节阅读</view>
+  </view>
+
+  <!-- 按需查找：场景 + 清单 -->
+  <block wx:if="{{mode === 'need'}}">
+    <view class="sec-head flex-row">
+      <text class="sec-title">遇到这件事，先看这里</text>
+      <text class="sec-note">共 {{scenarios.length}} 个场景</text>
+    </view>
+    <view class="sc-grid">
+      <view class="sc-cell card" wx:for="{{scenarios}}" wx:key="id" bindtap="goScenario" data-id="{{item.id}}">
+        <view class="sc-head flex-row">
+          <text class="sc-ico">{{item.icon}}</text>
+          <text class="flex-1"></text>
+          <text class="sc-count">{{item.count}} 条 ›</text>
+        </view>
+        <view class="sc-name">{{item.name}}</view>
+        <view class="sc-desc">{{item.desc}}</view>
+      </view>
+    </view>
+
+    <view class="sec-head flex-row">
+      <text class="sec-title">需要时，照着清单做</text>
+    </view>
+    <view class="ck-list card">
+      <view class="ck-row" wx:for="{{checklists}}" wx:key="id" bindtap="goChecklist" data-id="{{item.id}}">
+        <text class="ck-ico">{{item.icon}}</text>
+        <view class="flex-1">
+          <view class="ck-name">{{item.name}}</view>
+          <view class="ck-desc">{{item.desc}}</view>
+        </view>
+        <text class="ck-arrow">›</text>
+      </view>
+    </view>
+  </block>
+
+  <!-- 章节阅读：6 大主题 -->
+  <block wx:else>
+    <view class="sec-head flex-row">
+      <text class="sec-title">6 大主题</text>
+      <text class="sec-note">共 {{total}} 条建议</text>
+    </view>
+    <view class="cat-grid">
+      <view class="cat-cell card" wx:for="{{categories}}" wx:key="id"
+            style="background:{{item.color}}" bindtap="goTopic" data-id="{{item.id}}">
+        <view class="cat-head flex-row">
+          <text class="cat-ico">{{item.icon}}</text>
+          <text class="flex-1"></text>
+          <text class="cat-count">{{item.chapters.length}} 章 ›</text>
+        </view>
+        <view class="cat-name">{{item.name}}</view>
+        <view class="cat-desc">{{item.desc}}</view>
+      </view>
+    </view>
+
+    <view class="sec-head flex-row">
+      <text class="sec-title">⚡ 性价比排行</text>
+      <text class="sec-note">回报÷成本</text>
+    </view>
+    <view class="top-list card">
+      <view class="top-row" wx:for="{{top}}" wx:key="index" bindtap="goTop" data-c="{{item.c}}" data-e="{{item.e}}">
+        <view class="top-ring" style="border-color:{{item.tierKey === 'S' ? '#0e7c5a' : (item.tierKey === 'A' ? '#2d9a6b' : (item.tierKey === 'B' ? '#c08a2e' : '#b0623c'))}}">
+          <text class="top-ring-num">{{item.index}}</text>
+        </view>
+        <view class="flex-1 top-main">
+          <view class="top-title">{{item.title}}</view>
+          <view class="top-meta flex-row">
+            <text class="tier-{{item.tierKey}} top-tier">{{item.tierLabel}}</text>
+            <text class="lv lv-{{item.level}} top-lv">证据 {{item.level || '—'}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <view class="about">内容改编自 GitHub《高性价比人生指南》· 指数为本站测算</view>
+</view>

@@ -1,0 +1,83 @@
+<!-- pages/search/search.wxml -->
+<view class="page">
+  <!-- 模式切换 -->
+  <view class="seg">
+    <view class="seg-item {{mode==='search'?'on':''}}" data-m="search" bindtap="setMode">搜索</view>
+    <view class="seg-item {{mode==='ai'?'on':''}}" data-m="ai" bindtap="setMode">问 AI</view>
+  </view>
+
+  <!-- 搜索框 -->
+  <view class="sbox flex-row">
+    <text class="ico">🔍</text>
+    <input class="flex-1" placeholder="{{mode==='ai' ? '用自然语言提问，如：租房要注意什么' : '搜索问题，如睡眠、租房、社保'}}" value="{{q}}" bindinput="onInput" confirm-type="search" bindconfirm="onConfirm" />
+    <view wx:if="{{mode==='ai'}}" class="ask-btn {{!q?'off':''}}" bindtap="askAI">问 AI</view>
+  </view>
+
+  <!-- 搜索模式 -->
+  <block wx:if="{{mode==='search'}}">
+    <view class="lab">可以从这些开始</view>
+    <view class="chips flex-row">
+      <text class="chip {{q === item ? 'on' : ''}}" wx:for="{{quick}}" wx:key="*this" bindtap="onQuick" data-w="{{item}}">{{item}}</text>
+    </view>
+
+    <view class="lab">生活栏目</view>
+    <view class="chips flex-row">
+      <text class="chip {{cat === item.id ? 'on' : ''}}" wx:for="{{cats}}" wx:key="id" bindtap="onCat" data-id="{{item.id}}">{{item.name}}</text>
+    </view>
+
+    <view class="lab">证据</view>
+    <view class="chips flex-row">
+      <text class="chip {{lv === item.k ? 'on' : ''}}" wx:for="{{levels}}" wx:key="k" bindtap="onLv" data-k="{{item.k}}">{{item.n}}</text>
+    </view>
+
+    <view class="lab">从容易做到的开始</view>
+    <view class="chips flex-row">
+      <text class="chip {{costs[item.k] ? 'on' : ''}}" wx:for="{{costChips}}" wx:key="k" bindtap="onCost" data-k="{{item.k}}">{{item.n}}</text>
+    </view>
+
+    <view class="cnt">所有建议 {{count}} 条</view>
+
+    <view class="item card" wx:for="{{list}}" wx:key="key" bindtap="goDetail"
+          data-c="{{item.chapterIdx}}" data-e="{{item.entryIdx}}">
+      <view class="score-badge" style="background:{{item.color}}">
+        <text class="score-badge-num">{{item.index}}</text>
+      </view>
+      <view class="item-main flex-1">
+        <view class="item-head flex-row">
+          <text class="item-title flex-1">{{item.title}}</text>
+          <text class="star {{item.faved ? 'on' : ''}}" catchtap="onToggleFav" data-c="{{item.chapterIdx}}" data-e="{{item.entryIdx}}">★</text>
+        </view>
+        <view class="item-meta flex-row">
+          <text class="lv lv-{{item.lvKey}} item-lv" wx:if="{{item.level}}">证据 {{item.level}}</text>
+        </view>
+        <view class="item-plain">{{item.plain}}</view>
+      </view>
+    </view>
+
+    <view class="empty" wx:if="{{count === 0}}">没有匹配的内容，换个词试试</view>
+    <view class="more-tip" wx:if="{{list.length < count}}">上滑加载更多（已显示 {{list.length}}/{{count}}）</view>
+  </block>
+
+  <!-- AI 模式 -->
+  <block wx:if="{{mode==='ai'}}">
+    <view wx:if="{{aiThinking && !aiAnswer}}" class="ai-state">AI 正在思考…</view>
+
+    <view wx:if="{{aiAnswer}}" class="ai-card">
+      <view class="ai-q">问：{{aiQuestion}}</view>
+      <view class="ai-a">{{aiAnswer}}</view>
+      <view class="ai-acts">
+        <text wx:if="{{aiThinking}}" class="ai-act" bindtap="stopAI">■ 停止生成</text>
+        <text wx:if="{{aiDone && !aiThinking}}" class="ai-act" bindtap="regenAI">↻ 重新生成</text>
+      </view>
+    </view>
+
+    <view wx:if="{{aiCiting.length}}" class="ai-cite-lab">参考条目</view>
+    <view wx:for="{{aiCiting}}" wx:key="key" class="ai-cite" bindtap="goCite" data-c="{{item.chapterIdx}}" data-e="{{item.entryIdx}}">
+      <text class="ai-cite-t">第{{item.chapterIdx+1}}章 · {{item.title}}</text>
+      <text class="ai-cite-p">{{item.plain}}</text>
+    </view>
+
+    <view wx:if="{{aiError}}" class="ai-error">{{aiError}}</view>
+    <view wx:if="{{aiDone && !aiAnswer && !aiError}}" class="ai-state">暂时没有可回答的内容，换个问法试试。</view>
+  </block>
+</view>

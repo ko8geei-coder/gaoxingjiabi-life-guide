@@ -1,0 +1,9 @@
+{
+  "name": "better-life-guide",
+  "version": "1.0.0",
+  "description": "高性价比人生指南 微信小程序",
+  "main": "app.js",
+  "dependencies": {
+    "@tencent-ai/workbuddy-cloud-sdk": "dev"
+  }
+}

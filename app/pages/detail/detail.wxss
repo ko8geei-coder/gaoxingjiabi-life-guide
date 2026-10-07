@@ -1,0 +1,40 @@
+/* pages/detail/detail.wxss */
+.page { padding: 0 24rpx 160rpx; }
+.head { padding: 28rpx; margin-top: 16rpx; }
+.ch-badge { font-size: 22rpx; color: #0e7c5a; background: #e6f4ee; display: inline-block; padding: 4rpx 14rpx; border-radius: 8rpx; margin-bottom: 14rpx; }
+.title { font-size: 36rpx; font-weight: 700; color: #12211c; line-height: 1.4; }
+
+/* 性价比可视化 */
+.score { display: flex; flex-direction: row; align-items: center; padding: 26rpx; margin-top: 20rpx; }
+.score-ring { width: 130rpx; height: 130rpx; border-radius: 50%; border: 8rpx solid #0e7c5a; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-right: 26rpx; flex: none; }
+.score-num { font-size: 44rpx; font-weight: 700; color: #0e7c5a; line-height: 1; }
+.score-lab { font-size: 19rpx; color: #8a9a94; margin-top: 4rpx; }
+.score-side { min-width: 0; }
+.score-tier-row { margin-bottom: 10rpx; }
+.score-tier { font-size: 20rpx; padding: 4rpx 14rpx; border-radius: 999rpx; margin-right: 10rpx; }
+.score-lv { font-size: 20rpx; padding: 4rpx 12rpx; border-radius: 999rpx; }
+.score-note { font-size: 21rpx; color: #8a9a94; line-height: 1.5; }
+.segs { margin-top: 14rpx; height: 34rpx; border-radius: 999rpx; overflow: hidden; display: flex; flex-direction: row; }
+.seg { display: flex; align-items: center; justify-content: center; }
+.seg-t { font-size: 18rpx; color: #fff; }
+.seg-free { width: 100%; background: #d8e8e0; }
+.seg-free .seg-t { color: #0e7c5a; }
+
+/* 内容块 */
+.block { padding: 28rpx; margin-top: 20rpx; }
+.block-title { font-size: 29rpx; font-weight: 700; margin-bottom: 16rpx; color: #12211c; }
+.copy { font-size: 24rpx; color: #0e7c5a; }
+.para { font-size: 28rpx; color: #333; line-height: 1.8; }
+.note { color: #777; font-size: 26rpx; }
+.src { font-size: 22rpx; color: #888; line-height: 1.7; word-break: break-all; }
+.spacer { height: 20rpx; }
+
+/* 详细解读分点 */
+.interp-row { display: flex; flex-direction: row; align-items: flex-start; padding: 16rpx 0; border-bottom: 1rpx solid #f0f3f1; }
+.interp-row:last-child { border-bottom: none; }
+.interp-k { flex: none; width: 120rpx; font-size: 22rpx; color: #0e7c5a; background: #e6f4ee; padding: 4rpx 0; border-radius: 8rpx; text-align: center; margin-right: 20rpx; }
+.interp-v { flex: 1; font-size: 26rpx; color: #444; line-height: 1.7; }
+
+.bar { position: fixed; left: 0; right: 0; bottom: 0; height: 110rpx; background: #fff; box-shadow: 0 -2rpx 12rpx rgba(0,0,0,.06); display: flex; align-items: center; justify-content: center; }
+.bar-fav { display: flex; flex-direction: column; align-items: center; color: #0e7c5a; font-size: 36rpx; }
+.bar-fav-txt { font-size: 22rpx; margin-top: 2rpx; }

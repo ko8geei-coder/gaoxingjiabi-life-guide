@@ -1,0 +1,8 @@
+{
+  "desc": "高性价比人生指南小程序 - 改编自 GitHub eternity4719/HowToLiveBetter，仅用于学习演示",
+  "compileType": "miniprogram",
+  "libVersion": "3.0.0",
+  "appid": "touristappid",
+  "projectname": "life-guide",
+  "setting": { "urlCheck": false, "es6": true, "enhance": true, "postcss": true, "minified": true }
+}

@@ -1,0 +1,39 @@
+/* app.wxss 全局 —— 自研设计系统：墨绿主色 + 琥珀点缀 + 性价比可视化
+   （独立设计，非 1:1 复刻；加入原版没有的「性价比指数」可视化） */
+page {
+  --ink: #12211c;          /* 近黑墨绿 */
+  --brand: #0e7c5a;        /* 主品牌绿 */
+  --brand-2: #14a37a;
+  --amber: #e9a13b;        /* 琥珀点缀 */
+  --bg: #f2f4f2;
+  --sub: #6b7a75;
+  --line: #e6eae7;
+  background-color: #f2f4f2;
+  color: #12211c;
+  font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
+  font-size: 28rpx;
+}
+view, text, scroll-view, input, navigator { box-sizing: border-box; }
+.flex-row { display: flex; flex-direction: row; align-items: center; }
+.flex-col { display: flex; flex-direction: column; }
+.flex-1 { flex: 1; }
+
+/* 证据等级 */
+.lv-A { background:#0e7c5a; color:#fff; }
+.lv-B { background:#2f9e6e; color:#fff; }
+.lv-C { background:#c08a2e; color:#fff; }
+.lv-D { background:#b0623c; color:#fff; }
+.lv- { background:#9aa5a0; color:#fff; }
+
+.card { background: #fff; border-radius: 24rpx; }
+
+/* 性价比档位 */
+.tier-S { background:#0e7c5a; color:#fff; }
+.tier-A { background:#2d9a6b; color:#fff; }
+.tier-B { background:#c08a2e; color:#fff; }
+.tier-C { background:#b0623c; color:#fff; }
+
+/* 迷你 chip */
+.chip { font-size:20rpx; padding:4rpx 14rpx; border-radius:999rpx; background:#eef1ef; color:#55635e; margin-right:10rpx; }
+.chip-ev { background:#e6f4ee; color:#0e7c5a; }
+.chip-amber { background:#fdf3e2; color:#b0761f; }

@@ -1,0 +1,61 @@
+<!-- pages/mine/mine.wxml -->
+<view class="page">
+  <view class="head">
+    <view class="eyebrow">把日子过得更从容</view>
+    <view class="title">我的生活手册</view>
+    <view class="sub">留住有用的建议，按自己的节奏读。</view>
+  </view>
+
+  <!-- 三段统计 -->
+  <view class="stats card">
+    <view class="st" bindtap="goFav">
+      <view class="st-num">{{favCount}}</view>
+      <view class="st-lab">已收藏</view>
+    </view>
+    <view class="st-div"></view>
+    <view class="st">
+      <view class="st-num">{{readCount}}</view>
+      <view class="st-lab">已读完</view>
+    </view>
+    <view class="st-div"></view>
+    <view class="st">
+      <view class="st-num">{{chapterCount}}</view>
+      <view class="st-lab">生活章节</view>
+    </view>
+  </view>
+
+  <!-- 随机一条 -->
+  <view class="random" bindtap="randomOne">
+    <text class="rd-ico">🎲</text>
+    <text class="rd-txt">随机来一条</text>
+    <text class="rd-arrow">↗</text>
+  </view>
+
+  <!-- 最近读过 -->
+  <view class="sec-head flex-row" wx:if="{{hisList.length}}">
+    <text class="sec-title">最近读过</text>
+    <text class="sec-more" bindtap="goFav">全部 ›</text>
+  </view>
+  <view class="card his-list" wx:if="{{hisList.length}}">
+    <view class="h-row" wx:for="{{hisList}}" wx:key="index" bindtap="goDetail" data-c="{{item.c}}" data-e="{{item.e}}">
+      <view class="score-badge" style="background:{{item.tierKey === 'S' ? '#0e7c5a' : (item.tierKey === 'A' ? '#2d9a6b' : (item.tierKey === 'B' ? '#c08a2e' : '#b0623c'))}}">
+        <text class="score-badge-num">{{item.index}}</text>
+      </view>
+      <view class="flex-1 h-main">
+        <view class="h-title">{{item.title}}</view>
+        <view class="h-prog flex-row">
+          <view class="h-bar flex-1"><view class="h-in" style="width:{{item.progress}}%"></view></view>
+          <text class="h-pct">{{item.progress}}%</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card about-card">
+    <view class="ab-row"><text class="ab-k">共收录</text><text class="ab-v">{{totalCount}} 条建议</text></view>
+    <view class="ab-row"><text class="ab-k">数据来源</text><text class="ab-v">GitHub《高性价比人生指南》</text></view>
+    <view class="ab-row"><text class="ab-k">存储方式</text><text class="ab-v">本机保存 · 无需登录</text></view>
+  </view>
+
+  <view class="foot-note">内容改编自 GitHub《高性价比人生指南》· 配色与排版为本站独立设计</view>
+</view>

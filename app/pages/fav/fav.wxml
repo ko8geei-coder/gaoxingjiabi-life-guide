@@ -1,0 +1,67 @@
+<!-- pages/fav/fav.wxml -->
+<view class="page">
+  <!-- 标题 + 分段 -->
+  <view class="head">
+    <view class="eyebrow">把日子过得更从容</view>
+    <view class="title">留住有用的那几条</view>
+    <view class="sub">本机保存 · 无需登录</view>
+  </view>
+
+  <view class="seg">
+    <view class="seg-btn {{tab === 'fav' ? 'on' : ''}}" data-tab="fav" bindtap="switchTab">收藏 {{favCount}}</view>
+    <view class="seg-btn {{tab === 'recent' ? 'on' : ''}}" data-tab="recent" bindtap="switchTab">最近阅读 {{hisCount}}</view>
+  </view>
+
+  <!-- 收藏 -->
+  <block wx:if="{{tab === 'fav'}}">
+    <view class="item card" wx:for="{{favList}}" wx:key="index" bindtap="goDetail" data-c="{{item.c}}" data-e="{{item.e}}">
+      <view class="score-badge" style="background:{{item.tierKey === 'S' ? '#0e7c5a' : (item.tierKey === 'A' ? '#2d9a6b' : (item.tierKey === 'B' ? '#c08a2e' : '#b0623c'))}}">
+        <text class="score-badge-num">{{item.index}}</text>
+      </view>
+      <view class="item-main flex-1">
+        <view class="item-head flex-row">
+          <text class="item-title flex-1">{{item.title}}</text>
+          <text class="unfav" catchtap="onUnfav" data-c="{{item.c}}" data-e="{{item.e}}">移除</text>
+        </view>
+        <view class="item-meta flex-row">
+          <text class="lv lv-{{item.level}} item-lv">证据 {{item.level || '—'}}</text>
+          <text class="item-ch">{{item.ch}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty" wx:if="{{favCount === 0}}">
+      <view class="empty-ring">🔖</view>
+      <view class="empty-title">留住对你有用的那一条</view>
+      <view class="empty-sub">看到有用的建议，点一下收藏。下次需要时，就能在这里找到。</view>
+      <view class="empty-btn" bindtap="goGuide">去指南看看</view>
+    </view>
+  </block>
+
+  <!-- 最近阅读 -->
+  <block wx:else>
+    <view class="sec-label" wx:if="{{hisCount}}">继续上次阅读</view>
+    <view class="item card his" wx:for="{{hisList}}" wx:key="index" bindtap="goDetail" data-c="{{item.c}}" data-e="{{item.e}}">
+      <view class="item-head flex-row">
+        <text class="item-title flex-1">{{item.title}}</text>
+        <text class="lv lv-{{item.level}} item-lv">{{item.level || '—'}}</text>
+      </view>
+      <view class="item-ch2">{{item.ch}}</view>
+      <view class="prog-row flex-row">
+        <view class="prog flex-1"><view class="prog-in" style="width:{{item.progress}}%"></view></view>
+        <text class="prog-txt">已读 {{item.progress}}%</text>
+      </view>
+      <view class="go-read" wx:if="{{item.progress < 95}}">继续阅读 ↗</view>
+      <view class="go-read done" wx:else>已读完 · 再看一遍 ↗</view>
+    </view>
+
+    <view class="empty" wx:if="{{hisCount === 0}}">
+      <view class="empty-ring">🕘</view>
+      <view class="empty-title">还没有阅读记录</view>
+      <view class="empty-sub">读过的建议会出现在这里，方便接着往下看。</view>
+      <view class="empty-btn" bindtap="goGuide">去指南看看</view>
+    </view>
+  </block>
+
+  <view class="foot-note">收藏与阅读记录仅保存在当前设备</view>
+</view>

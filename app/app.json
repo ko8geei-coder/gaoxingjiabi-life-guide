@@ -1,0 +1,31 @@
+{
+  "lazyCodeLoading": "requiredComponents",
+  "pages": [
+    "pages/index/index",
+    "pages/fav/fav",
+    "pages/mine/mine",
+    "pages/chapter/chapter",
+    "pages/detail/detail",
+    "pages/search/search"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#12211c",
+    "navigationBarTitleText": "高性价比人生指南",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f2f4f2"
+  },
+  "tabBar": {
+    "color": "#8a9a94",
+    "selectedColor": "#0e7c5a",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "指南", "iconPath": "images/tabbar/home.png", "selectedIconPath": "images/tabbar/home-active.png" },
+      { "pagePath": "pages/fav/fav", "text": "收藏", "iconPath": "images/tabbar/fav.png", "selectedIconPath": "images/tabbar/fav-active.png" },
+      { "pagePath": "pages/mine/mine", "text": "我的", "iconPath": "images/tabbar/mine.png", "selectedIconPath": "images/tabbar/mine-active.png" }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

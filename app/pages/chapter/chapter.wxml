@@ -1,0 +1,84 @@
+<!-- pages/chapter/chapter.wxml -->
+<view class="page">
+  <view class="head">
+    <view class="head-row flex-row">
+      <text class="toc-btn" bindtap="toggleToc">☰ 目录</text>
+    </view>
+    <view class="title">{{title}}</view>
+    <view class="sub" wx:if="{{sub}}">{{sub}}</view>
+  </view>
+
+  <!-- 章内搜索（仅单章模式） -->
+  <view class="ch-search" wx:if="{{isChapter}}">
+    <input placeholder="在本章内搜索…" value="{{chKw}}" bindinput="onChKw" confirm-type="search" />
+  </view>
+
+  <!-- 分组模式（场景/主题/清单） -->
+  <block wx:if="{{groups.length}}">
+    <view class="group" wx:for="{{groups}}" wx:key="title" wx:for-item="grp">
+      <view class="group-title">{{grp.title}}</view>
+      <view class="items">
+        <view class="item card" wx:for="{{grp.items}}" wx:key="key" bindtap="goDetail"
+              data-c="{{item.chapterIdx}}" data-e="{{item.entryIdx}}">
+          <view class="score-badge" style="background:{{item.color}}">
+            <text class="score-badge-num">{{item.index}}</text>
+          </view>
+          <view class="item-main flex-1">
+            <view class="item-head flex-row">
+              <text class="item-title flex-1">{{item.title}}</text>
+              <text class="star {{item.faved ? 'on' : ''}}" catchtap="onToggleFav" data-c="{{item.chapterIdx}}" data-e="{{item.entryIdx}}">★</text>
+            </view>
+            <view class="item-meta flex-row">
+              <text class="lv lv-{{item.lvKey}} item-lv" wx:if="{{item.level}}">证据 {{item.level}}</text>
+            </view>
+            <view class="item-plain">{{item.plain}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 平铺模式（单章/搜索） -->
+  <block wx:else>
+    <view class="item card" wx:for="{{list}}" wx:key="key" bindtap="goDetail"
+          data-c="{{item.chapterIdx}}" data-e="{{item.entryIdx}}">
+      <view class="score-badge" style="background:{{item.color}}">
+        <text class="score-badge-num">{{item.index}}</text>
+      </view>
+      <view class="item-main flex-1">
+        <view class="item-head flex-row">
+          <text class="item-title flex-1">{{item.title}}</text>
+          <text class="star {{item.faved ? 'on' : ''}}" catchtap="onToggleFav" data-c="{{item.chapterIdx}}" data-e="{{item.entryIdx}}">★</text>
+        </view>
+        <view class="item-meta flex-row">
+          <text class="lv lv-{{item.lvKey}} item-lv" wx:if="{{item.level}}">证据 {{item.level}}</text>
+        </view>
+        <view class="item-plain">{{item.plain}}</view>
+      </view>
+    </view>
+  </block>
+
+  <view class="empty" wx:if="{{list.length === 0 && groups.length === 0}}">没有匹配的内容，换个词试试</view>
+
+  <!-- 目录：全屏扁平化页面 -->
+  <view class="toc-page" wx:if="{{showToc}}">
+    <view class="toc-head">
+      <view class="toc-head-l">
+        <view class="toc-head-title">目录</view>
+        <view class="toc-head-sub">{{tocSub}}</view>
+      </view>
+      <view class="toc-close" bindtap="toggleToc">✕</view>
+    </view>
+    <scroll-view scroll-y class="toc-list">
+      <block wx:for="{{toc}}" wx:key="name" wx:for-item="grp">
+        <view class="toc-cat"><view class="toc-cat-dot" style="background:{{grp.color}}"></view>{{grp.name}}</view>
+        <view class="toc-item {{curC === item.idx ? 'toc-on' : ''}}" wx:for="{{grp.chapters}}" wx:key="idx"
+              bindtap="goTocChapter" data-idx="{{item.idx}}">
+          <view class="toc-num" style="background:{{grp.color}}">{{item.idx + 1}}</view>
+          <view class="toc-name">{{item.title}}</view>
+          <view class="toc-cnt">{{item.count}} 条</view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</view>

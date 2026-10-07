@@ -1,0 +1,55 @@
+/* pages/search/search.wxss */
+.page { padding: 24rpx 24rpx 40rpx; }
+
+/* 搜索框 */
+.sbox { background:#fff; border-radius:999rpx; padding:20rpx 30rpx; box-shadow:0 4rpx 16rpx rgba(18,33,28,.08); }
+.sbox input { font-size:28rpx; }
+.ico { font-size:28rpx; margin-right:14rpx; }
+
+/* 筛选区 */
+.lab { font-size:26rpx; font-weight:700; color:#12211c; margin:30rpx 4rpx 16rpx; }
+.chips { flex-wrap:wrap; }
+.chip { background:#fff; border:1rpx solid #e3e8e5; border-radius:999rpx; padding:12rpx 28rpx; font-size:25rpx; color:#445; margin:0 14rpx 14rpx 0; }
+.chip.on { background:#0e7c5a; border-color:#0e7c5a; color:#fff; }
+
+/* 计数 */
+.cnt { font-size:24rpx; color:#8a9a94; margin:20rpx 4rpx 18rpx; }
+
+/* 条目（与 chapter 页一致） */
+.item { display:flex; flex-direction:row; padding:24rpx; margin-bottom:16rpx; }
+.score-badge { width:64rpx; height:64rpx; border-radius:16rpx; display:flex; align-items:center; justify-content:center; margin-right:20rpx; flex:none; }
+.score-badge-num { font-size:26rpx; font-weight:700; color:#fff; }
+.item-main { min-width:0; }
+.item-head { align-items:flex-start; }
+.item-title { font-size:30rpx; font-weight:600; line-height:1.4; margin-right:12rpx; }
+.star { font-size:34rpx; color:#ddd; flex:none; }
+.star.on { color:#e9a13b; }
+.item-meta { margin:10rpx 0; }
+.item-lv { font-size:20rpx; padding:4rpx 12rpx; border-radius:8rpx; }
+.item-plain { font-size:26rpx; color:#666; line-height:1.6; }
+.empty { text-align:center; color:#bbb; padding:80rpx 0; font-size:26rpx; }
+.more-tip { text-align:center; color:#aaa; font-size:24rpx; padding:20rpx 0 10rpx; }
+
+/* 模式切换 */
+.seg { display:flex; background:#eef2f0; border-radius:999rpx; padding:6rpx; margin-bottom:20rpx; }
+.seg-item { flex:1; text-align:center; padding:14rpx 0; font-size:27rpx; color:#5b6b65; border-radius:999rpx; }
+.seg-item.on { background:#fff; color:#0e7c5a; font-weight:700; box-shadow:0 2rpx 8rpx rgba(18,33,28,.08); }
+
+/* AI 问按钮 */
+.ask-btn { margin-left:14rpx; background:#0e7c5a; color:#fff; font-size:26rpx; padding:0 26rpx; border-radius:999rpx; display:flex; align-items:center; flex:none; }
+.ask-btn.off { background:#c7d2cd; }
+
+/* AI 状态/回答 */
+.ai-state { text-align:center; color:#9aa8a2; font-size:26rpx; padding:40rpx 0; }
+.ai-card { background:#fff; border-radius:20rpx; padding:26rpx; box-shadow:0 4rpx 16rpx rgba(18,33,28,.08); margin-bottom:18rpx; }
+.ai-q { font-size:26rpx; color:#8a9a94; margin-bottom:14rpx; }
+.ai-a { font-size:29rpx; color:#1c2b26; line-height:1.75; white-space:pre-wrap; word-break:break-word; }
+.ai-acts { display:flex; gap:24rpx; margin-top:18rpx; }
+.ai-act { font-size:25rpx; color:#0e7c5a; }
+
+/* 引用条目 */
+.ai-cite-lab { font-size:26rpx; font-weight:700; color:#12211c; margin:6rpx 4rpx 14rpx; }
+.ai-cite { background:#f6f9f7; border-radius:16rpx; padding:18rpx 20rpx; margin-bottom:12rpx; display:flex; flex-direction:column; }
+.ai-cite-t { font-size:27rpx; font-weight:600; color:#1c2b26; margin-bottom:6rpx; }
+.ai-cite-p { font-size:23rpx; color:#7a8783; line-height:1.5; }
+.ai-error { background:#fdecec; color:#c0392b; font-size:25rpx; padding:20rpx 22rpx; border-radius:14rpx; line-height:1.6; }
