@@ -13,3 +13,6 @@ diag_*.png
 pdfs/
 _pdf_text.txt
 _obsidian_src/
+
+# 交接包（含大文件，不入仓库）
+life-guide-handoff.zip
