@@ -1,12 +1,20 @@
 # 交给 CloudBase Agent 的交接说明
 
-> 用法：把下面「第一部分」整段复制粘贴到 CloudBase Agent 的对话输入框（配合上传 `life-guide-handoff.zip` 或已关联的 Git 仓库）。第二部分是项目技术档案，供 Agent 和你自己参考。
+> **用法（代码如何进入工作区）**：把下面「第一部分」整段复制粘贴到 CloudBase Agent 的对话输入框。项目代码通过以下两种方式之一进入工作区：
+> - **方式 A（传 Zip）**：在客户端上传 `life-guide-handoff.zip`（本仓库根目录已包含此文件，约 4MB），让 Agent 解压到工作区根目录，解压后根目录即项目根（含 `app/`、`data/`、`tencent-hy3-proxy/` 等）。
+> - **方式 B（关联 Git）**：在 CloudBase 面板「关联第三方 Git」→ 授权 GitHub 账号 `ko8geei-coder` → 绑定私有仓库 `gaoxingjiabi-life-guide`，仓库地址 `https://github.com/ko8geei-coder/gaoxingjiabi-life-guide.git`。Agent 拉取后项目位于克隆目录下（注意：Git 关联通常是克隆到一个子目录，而非直接铺在工作区根；请以实际克隆出的项目文件夹为准）。
+>
+> 第二部分是项目技术档案，供 Agent 和你自己参考。
+>
+> ⚠️ **空白模板共存提示**：若工作区当前已存在一个「空白云开发模板」（典型特征：`miniprogram/`、`cloudfunctions/getOpenId/`、`project.config.json` 占位），那是平台脚手架、**不是本项目**。本项目的小程序代码在 `app/` 目录（原生微信小程序，并非 `miniprogram/`）。请让 Agent 以 `app/` 为真实项目根，并在第一步**先删除空白模板的 `miniprogram/` 与 `cloudfunctions/getOpenId/`** 避免目录混淆；`project.config.json` 优先保留含真实 appid 的那份（若无真实 appid 则用 `app/project.config.json`，稍后补填）。
 
 ---
 
 ## 第一部分：直接粘给 CloudBase Agent 的话
 
-我在开发一个微信小程序项目「高性价比人生指南」，代码已提供（上传的压缩包 / 已关联的 Git 仓库，解压后根目录即项目根）。请基于现有代码继续开发，不要从零重写。
+我在开发一个微信小程序项目「高性价比人生指南」，代码已通过上述方式（上传的压缩包 / 已关联的 Git 仓库）进入你的工作区。请基于现有代码继续开发，不要从零重写。
+
+⚠️ **重要前置（请先执行）**：你的工作区可能已存在一个「空白云开发模板」（`miniprogram/`、`cloudfunctions/getOpenId/`、`模板 project.config.json`）。那是平台脚手架，不是本项目——本项目的小程序代码在 `app/` 目录（原生微信小程序，非 `miniprogram/`）。请以 `app/` 为准，并**在第一步先删除那些空白模板文件**（`miniprogram/`、`cloudfunctions/getOpenId/`），只保留本项目的结构；`project.config.json` 若含真实 appid 则保留并让本项目 `app/` 复用它，若是 `touristappid` 占位则与我的 `app/project.config.json` 二选一、稍后补填真实 appid。完成后请明确告诉我你清理后的目录结构，我再确认。
 
 项目概况：
 - 数据来源：GitHub eternity4719/HowToLiveBetter《高性价比人生指南》，34 章 669 条基于证据的生活建议，已解析为结构化 JSON（data/guide.json 与 app/data/guide.json，字段：num/title/tags/cost/plain/benefit/level/source/note）。
@@ -20,7 +28,7 @@
 2. 保持现有 UI 与功能不回退，遵循现有代码风格。
 3. 硬约束：小程序主包 <2MB（当前 1.97MB 已接近上限，新增页面/资源请用分包）；API 密钥绝不写进前端代码；data 下文件保持 UTF-8 无乱码。
 
-请先不要改动任何文件：先通读项目结构，输出一份你理解的架构说明 + AI 改造方案（含云函数设计），我确认后再动手。
+请先不要改动任何文件：先通读项目结构（含上面"先执行"的清理），输出一份你理解的架构说明 + AI 改造方案（含云函数设计），我确认后再动手。
 
 ---
 
