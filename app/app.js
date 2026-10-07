@@ -1,16 +1,50 @@
 // app.js
 const guide = require('./data/guide.json')
+const wxCloud = require('./utils/wxcloud-config.js')
 
 App({
   globalData: {
     guide,                 // 全部章节与建议
     favorites: [],         // 收藏（本地存储 key: lifeguide_fav）
-    history: []            // 阅读记录（含已读百分比 progress）
+    history: [],           // 阅读记录（含已读百分比 progress）
+    openid: '',            // 云开发识别到的用户 openid（未配置云开发时为空）
+    hasProfile: false      // 用户是否已完善昵称头像
   },
 
   onLaunch() {
     this.globalData.favorites = wx.getStorageSync('lifeguide_fav') || []
     this.globalData.history = wx.getStorageSync('lifeguide_history') || []
+    this._initCloud()
+  },
+
+  // 初始化微信云开发：静默记录「谁在用」（openid 由云函数识别，前端不传身份）
+  _initCloud() {
+    if (!wxCloud.envId || !wx.cloud) return // 未配置环境ID或基础库过低 → 自动跳过，不影响其它功能
+    wx.cloud.init({ env: wxCloud.envId, traceUser: true })
+    this.trackUser('launch')
+  },
+
+  // 上报一次用户行为；extra 可带 { nickname, avatarUrl } 完善资料
+  // 返回 Promise，调用方可 await 到云端真实结果（未配置云开发时直接 resolve）
+  trackUser(action, extra) {
+    if (!wxCloud.envId || !wx.cloud) return Promise.resolve(null)
+    return new Promise((resolve) => {
+      wx.cloud.callFunction({
+        name: wxCloud.fnName,
+        data: Object.assign({ action: action || 'unknown' }, extra || {}),
+        success: (res) => {
+          const r = res && res.result
+          if (r && r.ok) {
+            this.globalData.openid = r.openid
+            this.globalData.hasProfile = !!r.hasProfile
+            resolve(r)
+          } else {
+            resolve(null)
+          }
+        },
+        fail: () => resolve(null)
+      })
+    })
   },
 
   _persist() {

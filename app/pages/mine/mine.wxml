@@ -51,10 +51,24 @@
     </view>
   </view>
 
+  <!-- 我的资料（云开发：静默记录 openid + 自愿完善昵称头像） -->
+  <view class="card profile-card" wx:if="{{cloudOn}}">
+    <view class="sec-title">我的资料</view>
+    <view class="pf-row">
+      <button class="pf-avatar" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+        <image wx:if="{{avatarUrl}}" class="pf-avatar-img" src="{{avatarUrl}}" mode="aspectFill"></image>
+        <text wx:else class="pf-avatar-ph">选头像</text>
+      </button>
+      <input class="pf-nick" type="nickname" value="{{nicknameInput}}" placeholder="点此填写昵称" bindinput="onNicknameInput" maxlength="20" />
+    </view>
+    <view class="pf-tip">{{hasProfile ? '已记录，管理员可在后台看到你的昵称头像' : '完善昵称头像后，管理员才能在后台认出你（完全自愿）'}}</view>
+    <button class="pf-save" bindtap="saveProfile" disabled="{{saving}}">{{saving ? '保存中…' : '保存资料'}}</button>
+  </view>
+
   <view class="card about-card">
     <view class="ab-row"><text class="ab-k">共收录</text><text class="ab-v">{{totalCount}} 条建议</text></view>
     <view class="ab-row"><text class="ab-k">数据来源</text><text class="ab-v">GitHub《高性价比人生指南》</text></view>
-    <view class="ab-row"><text class="ab-k">存储方式</text><text class="ab-v">本机保存 · 无需登录</text></view>
+    <view class="ab-row"><text class="ab-k">存储方式</text><text class="ab-v">{{cloudOn ? '本机保存 + 云端匿名记录使用' : '本机保存 · 无需登录'}}</text></view>
   </view>
 
   <view class="foot-note">内容改编自 GitHub《高性价比人生指南》· 配色与排版为本站独立设计</view>

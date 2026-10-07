@@ -38,6 +38,31 @@
 .h-in { height:100%; background:#0e7c5a; border-radius:999rpx; }
 .h-pct { font-size:20rpx; color:#a8b4af; margin-left:14rpx; }
 
+/* 我的资料（云开发） */
+.profile-card { margin-top:24rpx; padding:26rpx; }
+.pf-row { display:flex; flex-direction:row; align-items:center; margin-top:20rpx; }
+.pf-avatar {
+  width:120rpx; height:120rpx; min-height:120rpx; line-height:1;
+  border-radius:50%; padding:0; margin:0 24rpx 0 0; flex:none;
+  background:#eef1ef; border:1rpx solid #e2e8e5; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+}
+.pf-avatar::after { border:none; }
+.pf-avatar-img { width:120rpx; height:120rpx; border-radius:50%; }
+.pf-avatar-ph { font-size:22rpx; color:#8a9a94; }
+.pf-nick {
+  flex:1; height:76rpx; line-height:76rpx; padding:0 20rpx;
+  background:#f6f8f7; border:1rpx solid #eef1ef; border-radius:14rpx;
+  font-size:28rpx; color:#1a1a1a;
+}
+.pf-tip { font-size:22rpx; color:#8a9a94; line-height:1.6; margin-top:18rpx; }
+.pf-save {
+  margin-top:20rpx; height:76rpx; line-height:76rpx; border-radius:999rpx;
+  background:#0e7c5a; color:#fff; font-size:28rpx; font-weight:600;
+}
+.pf-save::after { border:none; }
+.pf-save[disabled] { background:#b9c9c3; color:#fff; }
+
 /* 关于 */
 .about-card { padding:8rpx 26rpx; margin-top:24rpx; }
 .ab-row { display:flex; flex-direction:row; justify-content:space-between; padding:20rpx 0; border-bottom:1rpx solid #eef1ef; }
