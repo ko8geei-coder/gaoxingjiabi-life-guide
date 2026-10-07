@@ -1,7 +1,41 @@
 # 网页版部署说明
 
-> 备案要等 7-20 个工作日，这套网页版**不需要备案、不需要服务器备案域名**，
+> 备案要等7-20 个工作日，这套网页版**不需要备案、不需要服务器备案域名**，
 > 建好就能用，手机上打开和App 一样。
+
+---
+
+## 〇、线上已部署（2026-10-07 完成，两个平台都已上线）
+
+| 平台 | 地址 | 状态 |
+|---|---|---|
+| **GitHub Pages** | `https://ko8geei-coder.github.io/life-guide-web/` | ✅ 已上线，实测全部资源 200 |
+| CloudBase 静态托管 | 待在控制台开通后部署 |⏳ 等授权 |
+
+**GitHub Pages 这条已经能用了**，手机浏览器直接打开上面那个地址就行，换网络也能开。
+仓库地址：`https://github.com/ko8geei-coder/life-guide-web`（公开，只含网页版静态文件）
+
+> 小程序主仓库 `gaoxingjiabi-life-guide` 结构没动，网页版单独放了一个仓库，
+> 这样两个互不影响，各自更新。
+
+### 以后怎么更新网页版内容
+
+```bash
+# 1. 改内容后重新拆数据（在主仓库 life-guide 目录）
+node build-web.js
+
+# 2. 把web/ 拷到 Pages 仓库
+cp -r life-guide/web/. life-guide-pages/
+
+# 3. 提交推送（约 1 分钟后线上生效）
+cd life-guide-pages && git add -A && git commit -m "update" && git push
+```
+
+### 为什么 Pages 仓库要单独建
+
+小程序主仓库里有 `app.json`、`project.config.json` 等小程序专用文件，
+GitHub Pages 会把仓库根目录当站点根，直接部署会把小程序源码也暴露出去。
+单独建仓库 = 只放网页版文件，干净且不怕误改。
 
 ---
 
