@@ -1,7 +1,7 @@
 # 交给 CloudBase Agent 的交接说明
 
 > **用法（代码如何进入工作区）**：把下面「第一部分」整段复制粘贴到 CloudBase Agent 的对话输入框。项目代码通过以下两种方式之一进入工作区：
-> - **方式 A（传 Zip）**：在客户端上传 `life-guide-handoff.zip`（本仓库根目录已包含此文件，约 4MB），让 Agent 解压到工作区根目录，解压后根目录即项目根（含 `app/`、`data/`、`tencent-hy3-proxy/` 等）。
+> - **方式 A（传 Zip）**：在客户端上传 `life-guide-handoff.zip`（本仓库根目录已包含此文件，约 11MB，含完整代码 + 知识库上传包），让 Agent 解压到工作区。解压后会得到 `life-guide/` 子目录，**项目根就是它**（内含 `app/`、`data/`、`tencent-hy3-proxy/`、`cloudbase-kb/` 等）；请让 Agent 以该 `life-guide/` 目录为项目根，不要把它和空白模板混为一谈。
 > - **方式 B（关联 Git）**：在 CloudBase 面板「关联第三方 Git」→ 授权 GitHub 账号 `ko8geei-coder` → 绑定私有仓库 `gaoxingjiabi-life-guide`，仓库地址 `https://github.com/ko8geei-coder/gaoxingjiabi-life-guide.git`。Agent 拉取后项目位于克隆目录下（注意：Git 关联通常是克隆到一个子目录，而非直接铺在工作区根；请以实际克隆出的项目文件夹为准）。
 >
 > 第二部分是项目技术档案，供 Agent 和你自己参考。
