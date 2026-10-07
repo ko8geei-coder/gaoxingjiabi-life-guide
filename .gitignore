@@ -1,14 +1,15 @@
 # 依赖
 node_modules/
-*/node_modules/
+miniprogram_npm/
 
-# 备份与临时/参考文件
+# 备份与临时文件
 *.bak
-raw.bak/
-_obsidian_src/
-_pdf_text.txt
-life-guide-handoff.zip
+raw.bak
+*.log
 
-# 验证用截图（非源码）
+# 观测产物
 shot_*.png
 diag_*.png
+pdfs/
+_pdf_text.txt
+_obsidian_src/
